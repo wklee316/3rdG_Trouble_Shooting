@@ -67,33 +67,26 @@ int main()
     int a;
 
 
-    
     while (1) {
-        if (_kbhit())
-        {
-            if (_getch() == 27) return 0;
+        cin >> a;
+        if (cin.peek() == 27) return 0;
+        if (cin.fail()) {
+            // 실패했다면
+            cin.ignore(); // 입력하여 문자로 인식한'\n'도 무시
+            cin.clear(); // 입력 가능상태로 되돌리기
         }
-        else {
-            cin >> a;
-            if (std::cin.fail()) {
-                // 실패했다면
-                std::cin.ignore(); // 입력하여 문자로 인식한'\n'도 무시
-                std::cin.clear(); // 입력 가능상태로 되돌리기
-            }
-            rewind(stdin); // 입력버퍼 비우기
+        rewind(stdin); // 입력버퍼 비우기
 
-            if (a < 1 || a > 3999) {
-                cout << "입력된 값이 잘못되었습니다." << endl;
-                cin >> a;
-                continue;
-            }
-            string s = romanize(a);
-
-            cout << s << endl;
-
-            cin >> a;
+        if (a < 1 || a > 3999) {
+            cout << "입력된 값이 잘못되었습니다." << endl;
+            continue;
         }
+        string s = romanize(a);
+
+        cout << s << endl;
+
     }
+    
 
     return 0;
 }
