@@ -1,8 +1,29 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include <thread>
+#include <windows.h>
+#include <regex>
 
 using namespace std;
+
+
+void inputThread() {
+    // 키 입력 감지
+    while (true) {
+        if (GetAsyncKeyState(VK_ESCAPE)) { // esc 키 입력
+            exit(0); // 프로그램 종료
+        }
+    }
+}
+
+bool validateRoman(string roman) {
+    // 로마 숫자 형식 검사
+    regex pattern("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
+
+    // 로마 숫자 검사
+    return regex_match(roman, pattern);
+}
 
 // 로마자 문자를 아라비아 숫자로 변환하는 함수
 int romanToAr(char c) {
@@ -27,17 +48,12 @@ void loop() {
 
         int flag = 0;
 
-        romanNum = _getch();
-        if (romanNum[0] != 27)
-            getline(cin, romanNum);
-        else {
-            break;
-        }
+        getline(cin, romanNum);
 
 
-        if (romanNum.empty()) { // 입력 값이 없으면(비어있으면) loop를 나감
-            cout << "입력 오류입니다. 프로그램을 종료합니다." << endl;
-            return;
+        if (!validateRoman(romanNum)) { // 입력 값이 없으면(비어있으면) loop를 나감
+            cout << "잘못된 입력입니다. 다시 입력해주세요." << endl;
+            continue;
         }
 
         // 로마자 숫자를 아라비아 숫자로 변환하는 과정
@@ -55,12 +71,18 @@ void loop() {
                 arabicNum += romanToAr(romanNum[i]);
             }
         }
-        if(flag == 0)   cout << "아라비아 숫자로 변환한 결과: " << arabicNum << endl;
+        if (0 < arabicNum && arabicNum < 4000) {
+            if(flag == 0)   cout << "아라비아 숫자로 변환한 결과: " << arabicNum << endl;
+            //continue;
+        }
+        else cout << "출력 가능한 범위 바깥입니다. 다시입력해 주세요 " << endl;
     }
 }
 
 
 int main() {
+
+    thread t(inputThread);
 
     loop();
     return 0;
