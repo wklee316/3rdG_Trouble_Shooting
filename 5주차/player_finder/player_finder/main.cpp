@@ -19,13 +19,6 @@ bool isMovable(int x, int y, int n, int m) {
 
 void printMap() {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_FONT_INFOEX cfi;
-	cfi.cbSize = sizeof(cfi);
-	GetCurrentConsoleFontEx(hConsole, FALSE, &cfi);
-	CONSOLE_FONT_INFOEX oldCfi = cfi;
-	cfi.dwFontSize.X = 20; // 가로 크기를 12로 변경
-	cfi.dwFontSize.Y = 20; // 세로 크기를 24로 변경
-	SetCurrentConsoleFontEx(hConsole, FALSE, &cfi);
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
 			switch (map[i][j]->data)
@@ -50,24 +43,37 @@ void init() {
 		}
 	}
 
-
+	/*
 	map[2][1]->data = 1;
 	map[8][8]->data = 2;
 	map[4][4]->data = 3;
 	map[5][4]->data = 3;
 	map[6][4]->data = 3;
-
+	*/
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
-			Vmap[i][j] = map[i][j];
+			Vmap[i][j] = new Tile(map[i][j]->data, i, j);
 		}
 	}
 }
 
-void dfs(TreeNode* node) {
-	cout << node->tile->data << endl;
-	for (int i = 0; i < node->children.size(); i++) {
-		dfs(node->children[i]);
+void bfs(TreeNode* root) {
+	vector<TreeNode*> queue;
+	queue.push_back(root);
+
+	while (!queue.empty()) {
+		TreeNode* node = queue.front();
+		queue.erase(queue.begin());
+		cout << "(" << node->tile->x << ", " << node->tile->y << ")";
+		if (!node->children.empty()) {
+			cout << " -> [ ";
+			for (int i = 0; i < node->children.size(); i++) {
+				cout << "(" << node->children[i]->tile->x << ", " << node->children[i]->tile->y << ") ";
+				queue.push_back(node->children[i]);
+			}
+			cout << "]";
+		}
+		cout << endl;
 	}
 }
 
@@ -83,7 +89,7 @@ TreeNode* makeTree(TreeNode* node) {
 	for (int i = 0; i < 4; i++) {
 		int nx = x + dx[i];
 		int ny = y + dy[i];
-		if (isMovable(nx, ny, 10, 10) && Vmap[ny][nx]->data == 0) {
+		if (isMovable(nx, ny, 10, 10) && (Vmap[ny][nx]->data == 0 || Vmap[ny][nx]->data == 1 || Vmap[ny][nx]->data == 2)) {
 			TreeNode* child = new TreeNode(map[ny][nx]);
 			node->children.push_back(child);
 			Vmap[ny][nx]->data = 7; // 방문한 좌표는 7으로 변경하여 중복 방문을 방지함
@@ -94,18 +100,32 @@ TreeNode* makeTree(TreeNode* node) {
 	return node;
 }
 
+
+
+
+void visualize(TreeNode* node, int depth = 0) {
+	for (int i = 0; i < depth; i++) {
+		std::cout << "  ";
+	}
+	cout << "(" << node->tile->data << ", " << node->tile->x << ", " << node->tile->y <<")" <<endl;
+
+	for (auto child : node->children) {
+		visualize(child, depth + 1);
+	}
+}
+
 void route(int x, int y) {
 	TreeNode* root = new TreeNode(map[y][x]);
 
 
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
-			Vmap[i][j] = map[i][j];
+			Vmap[i][j] = new Tile(map[i][j]->data, i, j);
 		}
 	}
 	makeTree(root);
 
-	dfs(root);
+	bfs(root);
 }
 
 
@@ -116,9 +136,10 @@ int main() {
 	init();
 	printMap();
 
-	route(7, 7);
-	system("cls");
-	printMap();
+	route(0, 0);
+	
+	//system("cls");
+	//printMap();
 
 	
 	return 0;
