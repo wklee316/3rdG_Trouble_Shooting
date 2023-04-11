@@ -3,12 +3,13 @@
 
 class Map {
 
-public:
+private:
 	Tile* tile[10][10];
 	bool isVisit[10][10] = { false, };
 	vector<TreeNode*> shortestroute;
 	int px, py, ex, ey;
 
+public:
 	Map() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -80,6 +81,7 @@ public:
 
 		clear();
 		cout << endl << "엔터키를 입력하면 메인 화면으로 넘어갑니다.";
+		cin.ignore();
 		getchar();
 	}
 
