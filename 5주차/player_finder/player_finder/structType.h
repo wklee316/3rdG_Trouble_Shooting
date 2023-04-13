@@ -12,7 +12,7 @@ struct Tile {
 	}
 };
 
-struct TreeNode {
+struct TreeNode {				//트리 구조체
     Tile* tile;
 
     TreeNode* parents;

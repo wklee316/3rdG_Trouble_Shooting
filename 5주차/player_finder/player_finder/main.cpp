@@ -12,7 +12,7 @@ using namespace std;
 
 
 int main() {
-	int num = 1;
+	int num = 1;			//사용자가 선택한 기능을 입력받는 변수
 	Map m1;
 	m1.printMap();
 	

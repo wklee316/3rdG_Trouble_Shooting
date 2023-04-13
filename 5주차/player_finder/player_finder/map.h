@@ -61,7 +61,7 @@ public:
 
 	}
 
-	void printTrace() {
+	void printTrace() {				//최단경로를 출력하는 함수
 		int ln = 0;
 		shortestroute.clear();
 		shortestroute = route(ex, ey);
@@ -119,11 +119,11 @@ public:
 	
 private:
 
-	bool isMovable(int x, int y, int n, int m) {
+	bool isMovable(int x, int y, int n, int m) {	//해당 좌표로 이동 가능 여부를 반환하는 함수
 		return x >= 0 && x < n&& y >= 0 && y < m;
 	}
 
-	void clear() {
+	void clear() {							//isVisit 변수를 초기화 하는 함수
 
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -134,7 +134,7 @@ private:
 		}
 	}
 
-	vector<TreeNode*> makeRouteQueue(TreeNode* node) {
+	vector<TreeNode*> makeRouteQueue(TreeNode* node) {			//makeTree()에서 반환된 자식 노드에서 rote node 까지의 경로를 vector 자료 구조로 반환하는 함수
 		vector<TreeNode*> q;
 
 		q.push_back(node);
@@ -145,7 +145,7 @@ private:
 	}
 
 
-	TreeNode* makeTree(TreeNode* root) {
+	TreeNode* makeTree(TreeNode* root) {		//입력받은 노드에서 BFS 방식으로 트리를 생성하면서 플레이어가 있는 타일의          노드를 반환하는 함수
 
 
 		queue<TreeNode*> q;
@@ -183,7 +183,7 @@ private:
 		return root;
 	}
 
-	vector<TreeNode*> route(int x, int y) {
+	vector<TreeNode*> route(int x, int y) {				//입력받은 좌표에서 플레이어까지의 최단 경로 벡터를 반환하는 함수
 		TreeNode* root = new TreeNode(tile[y][x], NULL);
 
 		vector<TreeNode*> route = makeRouteQueue(makeTree(root));
