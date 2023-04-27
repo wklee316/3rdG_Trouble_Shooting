@@ -1,0 +1,9 @@
+﻿  main.c
+D:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(38,45): warning C4020: 'scanf_like': 실제 매개 변수가 너무 많습니다.
+D:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(44,77): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
+D:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(52,5): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(81,33): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(48,21): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(84,13): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(91): warning C4716: 'scanf_like': 값을 반환해야 합니다.
+  diy_scanf.vcxproj -> D:\3rdG_Trouble_Shooting\9주차\diy_scanf\x64\Debug\diy_scanf.exe

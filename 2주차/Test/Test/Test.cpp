@@ -11,6 +11,7 @@ bool validateRoman(string roman) {
 }
 
 int main() {
+    /*
     string roman;
     cout << "로마 숫자를 입력하세요: ";
     cin >> roman;
@@ -21,7 +22,15 @@ int main() {
     else {
         cout << "올바르지 않은 로마 숫자입니다." << endl;
     }
+    */
+    //char* str = (char*)malloc(sizeof(char) * 10);
 
+    int a = 5;
+    int b = 16;
+
+    scanf("hi\t%d\t%d", &a, &b);
+
+    printf("%d %d", a, b);
     return 0;
 }
 
