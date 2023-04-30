@@ -34,9 +34,12 @@ int main() {
     char ch;
     char str[256];
 
+    int a;
+
     printf("입력 : ");
-    scanf_like("hi %d, ||%f, %c, %s", &num, &f_num, &ch, str);
-    printf("%d %f %c %s\n", num, f_num, ch, str);
+    a = scanf_like("%d %f %c %s", &num, &f_num, &ch, str);
+    if (a == 1)  printf("%d %f %c %s\n", num, f_num, ch, str);
+    else printf("wrong input");
 
     return 0;
 }
@@ -45,47 +48,84 @@ int scanf_like(char* format, void* var, void* var1, void* var2, void* var3) {
     int start = 0;
     int peek = 0;
     int apeek = 0;
+
+    int cnt = 0;
+    int formatC = 0;
+    int inputC = 0;
+    int flag = 1;
     int arr[5] = { -1. };       //0: 정수 1: 실수, 2: 문자열, 3: 문자
     void* vaArr[4] = { var, var1, var2, var3 };
     char input[256] = { '\0', };
     char* str[5];
+
+
     gets(input);
 
-    for (int i = 0; format[i] != '\0'; i++) {
-        if (format[i] == '%') {
-            switch (format[i+1])
+    while (format[formatC] != '\0' && input[inputC] != '\0') {
+
+        if (format[formatC] == '%') {
+            switch (format[++formatC])
             {
-            case 'd': arr[apeek] = 0; break;
-            case 'f': arr[apeek] = 1; break;
-            case 's': arr[apeek] = 2; break;
-            case 'c': arr[apeek] = 3; break;
+            case 'd':
+                start = inputC;
+                while (input[inputC] != ' ' && input[inputC] != '\t' && input[inputC + 1] != '\0') inputC++;
+                str[cnt] = substr(input, start, inputC+1);
+                //printf("%s", str[cnt]);
+                if (atoi(str[cnt]) == 0) {
+                    flag = -1;
+                    return flag;
+                }
+                *(int*)vaArr[cnt] = atoi(str[cnt]);
+                inputC--;
+                cnt++;
+                break;
+            case 'f': 
+                start = inputC;
+                while ((input[inputC] != ' ') && (input[inputC] != '\t') && (input[inputC + 1] != '\0')) inputC++;
+                str[cnt] = substr(input, start, inputC + 1);
+                //printf("%s", str[cnt]);
+                if (atof(str[cnt]) == 0) {
+                    flag = -1;
+                    return flag;
+                }
+                *(float*)vaArr[cnt] = atof(str[cnt]);
+                inputC--;
+                cnt++;
+                break;
+            case 's':
+                start = inputC;
+                while ((input[inputC] != ' ') && (input[inputC] != '\t') && (input[inputC + 1] != '\0')) inputC++;
+                str[cnt] = substr(input, start, inputC + 1);
+                //printf("%s", str[cnt]);
+                strcpy((char*)vaArr[cnt], str[cnt]);
+                inputC--;
+                cnt++;
+                break;
+            case 'c':
+                start = inputC;
+                while ((input[inputC] != ' ') && (input[inputC] != '\t') && (input[inputC + 1] != '\0')) inputC++;
+                str[cnt] = substr(input, start, inputC + 1);
+                //printf("\n\n%s\n\n", str[cnt]);
+                if (inputC - start > 1) {
+                    flag = -1;
+                    return flag;
+                }
+                *(char*)vaArr[cnt] = str[cnt][0];
+                inputC--;
+                cnt++;
+                break;
             }
-            apeek++;
         }
-    }
-    for (int i = 0; input[i] != '\0'; i++) {
-        if (input[i] == ' ' || input[i] == '\t' || input[i + 1] == '\0') {
-            str[peek] = substr(input, start, i+1);
-            start = i + 1;
-            peek++;
+        else if (format[formatC] != input[inputC]) {
+            flag = -1;
+            //printf("???\n %c %c\n", format[formatC], input[inputC]);
+            return flag;
         }
+
+        //printf("%d", cnt);
+        formatC++;
+        inputC++;
     }
 
-    for (int i = 0; i < 4;i++) {
-        switch (arr[i])
-        {
-        case 0:
-            *(int*)vaArr[i] = atoi(str[i]);
-            break;
-        case 1:
-            *(float*)vaArr[i] = atof(str[i]);
-            break;
-        case 2:
-            strcpy((char*)vaArr[i], str[i]);
-            break;
-        case 3:
-            *(char*)vaArr[i] = str[i][0];
-            break;
-        }
-    }
+    return flag;
 }
