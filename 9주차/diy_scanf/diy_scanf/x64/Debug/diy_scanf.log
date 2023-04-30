@@ -1,5 +1,5 @@
 ﻿  main.c
-E:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(40,41): warning C4020: 'scanf_like': 실제 매개 변수가 너무 많습니다.
+E:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(40,42): warning C4020: 'scanf_like': 실제 매개 변수가 너무 많습니다.
 E:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(47,77): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
 E:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(62,5): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
 E:\3rdG_Trouble_Shooting\9주차\diy_scanf\diy_scanf\main.c(91,39): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.

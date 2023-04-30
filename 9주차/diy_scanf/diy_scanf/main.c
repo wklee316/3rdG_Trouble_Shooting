@@ -37,7 +37,7 @@ int main() {
     int a;
 
     printf("입력 : ");
-    a = scanf_like("%d %f %c %s", &num, &f_num, &ch, str);
+    a = scanf_like("%d\t%f %c %s", &num, &f_num, &ch, str);
     if (a == 1)  printf("%d %f %c %s\n", num, f_num, ch, str);
     else printf("wrong input");
 
@@ -46,14 +46,10 @@ int main() {
 
 int scanf_like(char* format, void* var, void* var1, void* var2, void* var3) {
     int start = 0;
-    int peek = 0;
-    int apeek = 0;
-
     int cnt = 0;
     int formatC = 0;
     int inputC = 0;
     int flag = 1;
-    int arr[5] = { -1. };       //0: 정수 1: 실수, 2: 문자열, 3: 문자
     void* vaArr[4] = { var, var1, var2, var3 };
     char input[256] = { '\0', };
     char* str[5];
@@ -69,7 +65,7 @@ int scanf_like(char* format, void* var, void* var1, void* var2, void* var3) {
             case 'd':
                 start = inputC;
                 while (input[inputC] != ' ' && input[inputC] != '\t' && input[inputC + 1] != '\0') inputC++;
-                str[cnt] = substr(input, start, inputC+1);
+                str[cnt] = substr(input, start, inputC + 1);
                 //printf("%s", str[cnt]);
                 if (atoi(str[cnt]) == 0) {
                     flag = -1;
@@ -79,7 +75,7 @@ int scanf_like(char* format, void* var, void* var1, void* var2, void* var3) {
                 inputC--;
                 cnt++;
                 break;
-            case 'f': 
+            case 'f':
                 start = inputC;
                 while ((input[inputC] != ' ') && (input[inputC] != '\t') && (input[inputC + 1] != '\0')) inputC++;
                 str[cnt] = substr(input, start, inputC + 1);
@@ -115,6 +111,14 @@ int scanf_like(char* format, void* var, void* var1, void* var2, void* var3) {
                 cnt++;
                 break;
             }
+        }
+        else if (format[formatC] == '\\' && format[formatC+1] == 't') {
+
+            if (input[inputC] != '\t') {
+                flag = -1;
+                return flag;
+            }
+            formatC ++;
         }
         else if (format[formatC] != input[inputC]) {
             flag = -1;
