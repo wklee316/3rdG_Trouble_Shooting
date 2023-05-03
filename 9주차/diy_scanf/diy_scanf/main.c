@@ -131,5 +131,7 @@ int scanf_like(char* format, void* var, void* var1, void* var2, void* var3) {
         inputC++;
     }
 
+    if (cnt != 4) flag = -1;
+
     return flag;
 }
