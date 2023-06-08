@@ -1,5 +1,5 @@
 ﻿  main.cpp
-E:\3rdG_Trouble_Shooting\15주차\JumpGame\JumpGame\GameLoop.h(162,14): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
-E:\3rdG_Trouble_Shooting\15주차\JumpGame\JumpGame\GameLoop.h(165,14): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
-E:\3rdG_Trouble_Shooting\15주차\JumpGame\JumpGame\GameLoop.h(170,14): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
-  JumpGame.vcxproj -> E:\3rdG_Trouble_Shooting\15주차\JumpGame\x64\Debug\JumpGame.exe
+D:\3rdG_Trouble_Shooting\15주차\JumpGame\JumpGame\GameLoop.h(165,14): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
+D:\3rdG_Trouble_Shooting\15주차\JumpGame\JumpGame\GameLoop.h(168,14): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
+D:\3rdG_Trouble_Shooting\15주차\JumpGame\JumpGame\GameLoop.h(173,14): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
+  JumpGame.vcxproj -> D:\3rdG_Trouble_Shooting\15주차\JumpGame\x64\Debug\JumpGame.exe

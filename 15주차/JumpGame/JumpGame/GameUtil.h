@@ -28,6 +28,10 @@ namespace GameUtil {
 		virtual void draw(vector<char>& screenBuffer) {
 
 		}
+
+		void jump() {
+
+		}
 	};
 
 	class BackGround : public gameObject {
@@ -63,8 +67,8 @@ namespace GameUtil {
 		int score;
 		float speed;
 		vector<GameUtil::gameObject*> objectPool;
-		Player p;
-		vector<Block> blockPool;
+
+		vector<Block*> blockPool;
 	public:
 		gameManager() {
 
@@ -79,6 +83,7 @@ namespace GameUtil {
 			{
 			case 32:
 				return 0;
+				
 				break;
 			case 'p':
 				return 1;
@@ -94,6 +99,10 @@ namespace GameUtil {
 		void init(vector<GameUtil::gameObject*>& objPool) {
 			
 			score = 0;
+			blockPool.push_back(dynamic_cast<Block*>(objectPool[5]));
+			blockPool.push_back(dynamic_cast<Block*>(objectPool[6]));
+			blockPool.push_back(dynamic_cast<Block*>(objectPool[7]));
+
 		}
 	};
 }
