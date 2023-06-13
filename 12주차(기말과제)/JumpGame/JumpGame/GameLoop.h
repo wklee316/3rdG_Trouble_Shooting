@@ -209,7 +209,6 @@ namespace GameLoop
 				Render();
 
 			}
-			Release();
 		}
 		void Stop()
 		{
